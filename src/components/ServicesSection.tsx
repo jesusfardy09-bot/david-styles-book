@@ -1,35 +1,29 @@
 import { Scissors, Star, Zap } from "lucide-react";
-import barberCutting from "@/assets/barber-cutting.jpg";
-import haircutFade from "@/assets/haircut-fade.jpg";
-import barberShave from "@/assets/barber-shave.jpg";
 
 const services = [
   {
     icon: Scissors,
-    title: "Corte de Pelo",
-    description:
-      "Corte personalizado según tu tipo de rostro y estilo. Técnicas modernas y clásicas. Incluye lavado y peinado final.",
-    price: "$6.000",
-    image: barberCutting,
-    badge: "Popular",
+    title: "Básico",
+    description: "Corte + perfilado (ceja, barba)",
+    price: "7.000",
+    image: "file:///C:/Users/Fardy/Pictures/davidbaber.jpg",
+    badge: null,
   },
   {
     icon: Star,
-    title: "Ceja",
-    description:
-      "Definición y perfilado de cejas con navaja de precisión. Marco perfecto para tu rostro.",
-    price: "$1.000",
-    image: haircutFade,
+    title: "Básico Pro",
+    description: "Básico + aperitivos + perfumes",
+    price: "10.000",
+    image: "file:///C:/Users/Fardy/Pictures/davidbaber.jpg",
     badge: null,
   },
   {
     icon: Zap,
-    title: "Corte + Ceja",
-    description:
-      "Servicio completo de corte de pelo y arreglo de cejas. El pack más popular de la barbería.",
-    price: "$7.000",
-    image: barberShave,
-    badge: "Combo",
+    title: "Premium",
+    description: "Básico Pro + asesoría de imagen profesional",
+    price: "30.000",
+    image: "file:///C:/Users/Fardy/Pictures/barber-cutting.jpg",
+    badge: null,
   },
 ];
 
