@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
 import { Scissors } from "lucide-react";
-
-const navLinks = [
-  { label: "Inicio", href: "#inicio" },
-  { label: "Servicios", href: "#servicios" },
-  { label: "Reservar", href: "#reservar" },
-  { label: "Galería", href: "#galeria" },
-  { label: "Contacto", href: "#contacto" },
-];
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -21,9 +17,24 @@ export default function Navbar() {
 
   const handleNav = (href: string) => {
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (href.startsWith("#")) {
+      if (!isHome) {
+        navigate("/" + href);
+        return;
+      }
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate(href);
+    }
   };
+
+  const navLinks = [
+    { label: "Inicio", href: "#inicio" },
+    { label: "Servicios", href: "#servicios" },
+    { label: "Galería", href: "#galeria" },
+    { label: "Contacto", href: "#contacto" },
+  ];
 
   return (
     <nav
@@ -34,25 +45,16 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <button
-          onClick={() => handleNav("#inicio")}
-          className="flex items-center gap-3 group"
-        >
+        <button onClick={() => handleNav("#inicio")} className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-full gradient-gold flex items-center justify-center shadow-gold group-hover:scale-110 transition-transform duration-300">
             <Scissors className="w-5 h-5 text-background" />
           </div>
           <div className="text-left">
-            <div className="font-display font-bold text-lg text-gold leading-tight">
-              David Minder
-            </div>
-            <div className="text-xs text-muted-foreground tracking-widest uppercase">
-              Barbería
-            </div>
+            <div className="font-display font-bold text-lg text-gold leading-tight">MINDER</div>
+            <div className="text-xs text-muted-foreground tracking-widest uppercase">Barbería</div>
           </div>
         </button>
 
-        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <button
@@ -65,14 +67,13 @@ export default function Navbar() {
             </button>
           ))}
           <button
-            onClick={() => handleNav("#reservar")}
+            onClick={() => handleNav("/reservar")}
             className="px-5 py-2 gradient-gold text-background text-sm font-semibold rounded-full shadow-gold hover:opacity-90 hover:scale-105 transition-all duration-200"
           >
-            Agendar Hora
+            Reservar Hora
           </button>
         </div>
 
-        {/* Mobile hamburger */}
         <button
           className="md:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -83,7 +84,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden bg-background/98 backdrop-blur-md border-t border-border py-4 px-6 flex flex-col gap-4">
           {navLinks.map((link) => (
@@ -96,10 +96,10 @@ export default function Navbar() {
             </button>
           ))}
           <button
-            onClick={() => handleNav("#reservar")}
+            onClick={() => handleNav("/reservar")}
             className="w-full py-3 gradient-gold text-background font-semibold rounded-full shadow-gold"
           >
-            Agendar Hora
+            Reservar Hora
           </button>
         </div>
       )}
