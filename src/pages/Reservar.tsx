@@ -4,7 +4,7 @@ import { CheckCircle, Scissors, Eye, ArrowLeft, ArrowRight, User, Phone, Mail, F
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
-const N8N_URL = "https://NGROK_URL/webhook/minder/book";
+const N8N_URL = "https://radiolucent-jaylah-overpartial.ngrok-free.dev/webhook/minder/book";
 
 const SERVICES = [
   {
